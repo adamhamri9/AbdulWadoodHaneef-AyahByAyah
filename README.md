@@ -60,7 +60,7 @@ cd AbdulWadoodHaneef-AyahByAyah/abdul-wadood-haneef
 
 ## Audio Validation Script
 
-A script `validate_audio.py` is provided to **verify the integrity and naming of all audio files**.
+A script `validate_audio.py` is provided to **verify the integrity and naming of all audio files**, as well as **detect content duplicates** (files with identical audio content).
 
 ### Running the script
 
@@ -70,7 +70,7 @@ python validate_audio.py -f ./abdul-wadood-haneef -ies True
 
 **Arguments:**
 
-* `-f ./abdul-wadood-haneef` or `--folder ./abdul-wadood-haneef` – Path to the folder containing audio files. 
+* `-f ./abdul-wadood-haneef` or `--folder ./abdul-wadood-haneef` – Path to the folder containing audio files.
 * `-ies True` or `-ies False` – Whether to **ignore surahs with no files**:
 
   * `True` → Skip empty surahs (useful if the project is still under progress).
@@ -80,7 +80,7 @@ python validate_audio.py -f ./abdul-wadood-haneef -ies True
 
 ### Output Explanation
 
-The script generates **two main outputs**:
+The script generates **three main outputs**:
 
 1. **Missing Files per Surah**
 
@@ -105,14 +105,27 @@ The script generates **two main outputs**:
      ----------------------------------------
      ```
 
-> This allows you to quickly identify missing audio and correct naming issues before further processing.
+3. **Content-Duplicate Files**
+
+   * Lists groups of files that have **identical audio content** based on SHA256 hash.
+   * Example:
+
+     ```
+     Content-duplicate groups (same SHA256):
+     Hash: 5393a91179de0b9667926155f2184083fcbe712c7b484a5319868d66ad51a422 -> 2 files
+       004043 - Copy.mp3
+       004043.mp3
+     ------------------------------
+     ```
+
+> This allows you to quickly identify missing, incorrectly named, or duplicated audio files before further processing.
 
 ---
 
 ## Contributing
 
 Contributions are welcome!
-If you would like to contribute, please **contact me via email**: 📧 [adamhamri9@proton.me](mailto:adamhamri9@proton.me)
+If you would like to contribute, please **contact me via email**: [adamhamri9@proton.me](mailto:adamhamri9@proton.me)
 
 ---
 
