@@ -76,8 +76,6 @@ python validate_audio.py -f ./abdul-wadood-haneef -ies True
   * `True` → Skip empty surahs (useful if the project is still under progress).
   * `False` → Count all missing ayahs, including surahs with no files.
 
----
-
 ### Output Explanation
 
 The script generates **three main outputs**:
@@ -119,6 +117,49 @@ The script generates **three main outputs**:
      ```
 
 > This allows you to quickly identify missing, incorrectly named, or duplicated audio files before further processing.
+
+---
+
+## Audio Index Generator
+
+A new script `generate_audio_index.py` is included to **create a structured JSON index** of all valid audio files, automatically **excluding files that are missing, misnamed, or duplicated**.
+
+### Running the script
+
+```bash
+python generate_audio_index.py -f ./abdul-wadood-haneef
+```
+
+**Arguments:**
+
+* `-f ./abdul-wadood-haneef` or `--folder ./abdul-wadood-haneef` – Path to the folder containing audio files.
+
+### Output
+
+1. **`audio_index.json`** – Contains a nested dictionary:
+
+```json
+{
+  "1": {
+    "1": {
+      "filename": "001001.mp3",
+      "path": "./abdul-wadood-haneef/001001.mp3",
+      "size_bytes": 123456,
+      "sha256": "abc123..."
+    },
+    ...
+  },
+  ...
+}
+```
+
+2. **Console Summary** – Lists files that were **excluded**:
+
+* Missing or zero-size files
+* Files with naming violations
+* Content duplicates
+
+This ensures the JSON index only includes **reliable and unique audio files**, ready for automated processing or integration in applications.
 
 ---
 
