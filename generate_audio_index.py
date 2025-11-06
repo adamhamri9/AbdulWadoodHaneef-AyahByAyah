@@ -34,7 +34,7 @@ def generate_audio_index(folder_path: str, url_prefix: str = "./"):
         index[key] = {
             "surah_number": surah_num,
             "ayah_number": ayah_num,
-            "audio_url": f"{url_prefix}{f}" if url_prefix else f"./{f}",
+            "audio_url": f"{url_prefix}{f}" if url_prefix else f"./{str(path.as_posix())}",
             "duration": duration,
             "segments": []
         }
