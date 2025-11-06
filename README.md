@@ -20,8 +20,10 @@ During the course of this project, I faced **some health challenges** and had to
 
 ## Project Structure
 
-* `README.md` – This documentation file.
-* `abdul-wadood-haneef/` – Folder containing audio files divided **verse by verse**.
+* `README.md` – This documentation file.  
+* `abdul-wadood-haneef/` – Folder containing audio files divided **verse by verse**.  
+* `validate_audio.py` – Script to verify audio files.  
+* `generate_audio_index.py` – Script to generate structured JSON index for valid audio files.
 
 **Audio file naming convention:**
 
@@ -31,10 +33,10 @@ Each audio file is named as `00X00X.mp3`, where:
 * The **last three digits** represent the **ayah number**.
 
 | File Name   | Surah | Ayah |
-|------------|-------|------|
-| 002003.mp3 | 2     | 3    |
-| 002004.mp3 | 2     | 4    |
-| 114001.mp3 | 114   | 1    |
+|-------------|--------|------|
+| 002003.mp3  | 2      | 3    |
+| 002004.mp3  | 2      | 4    |
+| 114001.mp3  | 114    | 1    |
 
 *(More files will be added as the project progresses.)*
 
@@ -93,7 +95,7 @@ The script generates **three main outputs**:
 
 2. **Files with Naming Violations**
 
-   * Lists files that **do not follow the correct naming convention** `XXXYYY.mp3`
+   * Lists files that **do not follow the correct naming convention** `XXXYYY.mp3`.
    * Includes files with **invalid surah or ayah numbers**.
    * Example:
 
@@ -122,44 +124,79 @@ The script generates **three main outputs**:
 
 ## Audio Index Generator
 
-A new script `generate_audio_index.py` is included to **create a structured JSON index** of all valid audio files, automatically **excluding files that are missing, misnamed, or duplicated**.
+A script `generate_audio_index.py` is included to **create a structured JSON index** of all valid audio files, automatically **excluding any missing, misnamed, or duplicated files**.
 
 ### Running the script
 
 ```bash
-python generate_audio_index.py -f ./abdul-wadood-haneef
+python generate_audio_index.py -f ./abdul-wadood-haneef -u https://mycdn.com/audio/
 ```
 
 **Arguments:**
 
 * `-f ./abdul-wadood-haneef` or `--folder ./abdul-wadood-haneef` – Path to the folder containing audio files.
+* `-u https://mycdn.com/audio/` or `--url-prefix https://mycdn.com/audio/` – Optional prefix or base URL for the audio files.
+
+  * If not provided, the script defaults to `./` for local file paths.
+
+---
 
 ### Output
 
-1. **`audio_index.json`** – Contains a nested dictionary:
+The script generates a single file: **`audio_index.json`**, structured as follows:
 
 ```json
 {
-  "1": {
-    "1": {
-      "filename": "001001.mp3",
-      "path": "./abdul-wadood-haneef/001001.mp3",
-      "size_bytes": 123456,
-      "sha256": "abc123..."
-    },
-    ...
+  "1:1": {
+    "surah_number": 1,
+    "ayah_number": 1,
+    "audio_url": "./001001.mp3",
+    "duration": 5.23,
+    "segments": []
   },
-  ...
+  "1:2": {
+    "surah_number": 1,
+    "ayah_number": 2,
+    "audio_url": "./001002.mp3",
+    "duration": 4.85,
+    "segments": []
+  }
 }
 ```
 
-2. **Console Summary** – Lists files that were **excluded**:
+**Field Descriptions:**
 
-* Missing or zero-size files
-* Files with naming violations
-* Content duplicates
+| Field          | Description                                                             |
+| -------------- | ----------------------------------------------------------------------- |
+| `surah_number` | The surah number (1–114).                                               |
+| `ayah_number`  | The verse number within the surah.                                      |
+| `audio_url`    | Path or URL to the verse audio (uses provided prefix or `./`).          |
+| `duration`     | Duration of the audio in seconds (float, may be `null` if unreadable).  |
+| `segments`     | Currently empty – reserved for per-word timing data in future versions. |
 
-This ensures the JSON index only includes **reliable and unique audio files**, ready for automated processing or integration in applications.
+---
+
+### Console Summary
+
+When executed, the script prints a brief summary:
+
+```bash
+Audio index generated: audio_index.json
+All files are valid and included in the index.
+```
+
+If invalid files are detected:
+
+```bash
+Audio index generated: audio_index.json
+The following files were excluded from the index for the reasons below:
+
+- Missing or zero-size files
+- Invalid filenames
+- Duplicate content detected
+```
+
+This ensures that the JSON index only contains **valid, unique, and usable** audio entries, ready for use in applications or APIs.
 
 ---
 
