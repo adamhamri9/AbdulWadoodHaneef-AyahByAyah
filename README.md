@@ -207,7 +207,24 @@ If you would like to contribute, please **contact me via email**: [adamhamri9@pr
 
 ---
 
-## Acknowledgment
+## Notices
 
-This project is a personal effort to organize the Qur’an **verse by verse** with the corresponding audio of Abdul-Wadood Haneef.
-May Allah accept it and grant benefit to anyone who uses it.
+* **Source of Recordings:**  
+  The full-surah audio recordings originate from the [qul.tarteel.ai](https://qul.tarteel.ai/resources/recitation/410) platform.
+
+* **Segmentation Process:**  
+  The verse-by-verse audio files found in this repository were **derived from those full-surah recordings** through a segmentation process intended to make the recitations easier to reference and study.
+
+* **Intent:**  
+  The work presented here is shared as part of an **independent, non-profit effort** that aims to support Qur’an-related projects and facilitate technical or educational exploration.
+
+* **Copyright Disclaimer:**  
+  No ownership is claimed over the original recordings.  
+  All rights remain with their **rightful owners** — **Sheikh Abdul-Wadood Haneef** and/or the **original production company** from which the recitations were sourced.  
+  The segmented verse-level audio files are a **derived technical format** based on publicly available materials.
+
+* **Legal Note:**  
+  This repository is provided for transparency and public benefit.  
+  Any copyright holder may request modification or removal of specific content, and such requests will be respected.
+
+
